@@ -39,12 +39,25 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="Neodynamic.SDK.ThermalLabel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=0630b9b3415848af, processorArchitecture=MSIL">
-      <HintPath>packages\Neodynamic.SDK.ThermalLabel.12.0.0\lib\netstandard2.0\Neodynamic.SDK.ThermalLabel.dll</HintPath>
+    <Reference Include="HidLibrary, Version=3.2.49.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\hidlibrary.3.3.40\lib\net45\HidLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.CoreScanner">
+      <HintPath>C:\Program Files\Zebra Technologies\Barcode Scanners\Scanner SDK\Scanner SDK\Sample Applications\bin\Interop.CoreScanner.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="InTheHand.Net.Personal, Version=3.5.605.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL">
+      <HintPath>packages\32feet.NET.3.5.0.0\lib\net\InTheHand.Net.Personal.dll</HintPath>
     </Reference>
     <Reference Include="Neodynamic.Windows.ThermalLabelEditor, Version=11.0.0.0, Culture=neutral, PublicKeyToken=c57773567150e634, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Neodynamic\ThermalLabel SDK\v11.0\Bin\WinEditor\Neodynamic.Windows.ThermalLabelEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet.Async, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Renci.SshNet.Async.1.4.0\lib\net40\Renci.SshNet.Async.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>packages\SkiaSharp.1.60.0\lib\net45\SkiaSharp.dll</HintPath>
@@ -67,6 +80,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>packages\ZXing.Net.0.16.9\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>packages\ZXing.Net.0.16.9\lib\net47\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Add_BandC.cs">
@@ -124,14 +143,14 @@
       <DependentUpon>Cashier_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Class\brand.cs" />
-    <Compile Include="CashierDash.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CashierDash.Designer.cs">
-      <DependentUpon>CashierDash.cs</DependentUpon>
-    </Compile>
     <Compile Include="Class\category.cs" />
     <Compile Include="Class\Connection.cs" />
+    <Compile Include="CrystalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DailySalesItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,12 +207,6 @@
     </Compile>
     <Compile Include="Pay.Designer.cs">
       <DependentUpon>Pay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Payment_Method.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Payment_Method.Designer.cs">
-      <DependentUpon>Payment_Method.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Qunatity_Changer.cs">
@@ -270,11 +283,12 @@
     <EmbeddedResource Include="Barcode_Generator.resx">
       <DependentUpon>Barcode_Generator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CashierDash.resx">
-      <DependentUpon>CashierDash.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Cashier_Form.resx">
       <DependentUpon>Cashier_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DailySalesItem.resx">
       <DependentUpon>DailySalesItem.cs</DependentUpon>
@@ -302,9 +316,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pay.resx">
       <DependentUpon>Pay.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Payment_Method.resx">
-      <DependentUpon>Payment_Method.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -354,7 +365,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Readme.txt" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ZebraScannerSO">
+      <Guid>{6D00CA30-8C4E-429A-AE9C-83B20C59D10B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets" Condition="Exists('packages\SkiaSharp.1.60.0\build\net45\SkiaSharp.targets')" />

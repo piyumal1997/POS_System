@@ -8,27 +8,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
+using ZXing.QrCode.Internal;
+using HidLibrary;
+
 
 namespace PosSystem
 {
+
     public partial class Admin_Pos : Form
     {
         int rowCount; //bollingItem row count
         int rowCountBill;
+        string Username;
         Timer timer = null;
 
-        public Admin_Pos()
+        public Admin_Pos(String UN, String Role)
         {
             InitializeComponent();
+
+            //User Passed Data
+            user.Text = UN;
+            Username = UN;
+            designation.Text = Role;
         }
 
         private void home_Click(object sender, EventArgs e)
         {
             if (billNumber.Text.Trim() == "")
             {
-                AdminDash f3 = new AdminDash();
-                f3.Show();
-                Visible = false;
+                this.Close();
             }
             else
             {
@@ -38,9 +47,7 @@ namespace PosSystem
                 DialogResult result = MessageBox.Show(message, title, buttons);
                 if (result == DialogResult.Yes)
                 {
-                    AdminDash f3 = new AdminDash();
-                    f3.Show();
-                    Visible = false;
+                    this.Close();
                 }
                 else
                 {
@@ -59,6 +66,7 @@ namespace PosSystem
 
         private void Admin_Pos_Load(object sender, EventArgs e)
         {
+
             try
             {
                 //DB Connection
@@ -69,7 +77,9 @@ namespace PosSystem
 
                 int returnPrice = 0;
                 int netPrice = 0;
-                //Get ALL from temp_bill
+
+
+                //Get ALL from temp_return
                 cmd.Connection = Connection.con;
                 cmd.CommandText = "USE pos SELECT SUM(price) AS PRICE FROM temp_return;";
                 SqlDataReader readSUM = cmd.ExecuteReader();
@@ -137,10 +147,6 @@ namespace PosSystem
                 dataAdapBill.SelectCommand = cmd;
                 dataAdapBill.Fill(dataTableBill);
                 billingItem.DataSource = dataTableBill;
-
-                //User
-                user.Text = "Priyanga";
-                designation.Text = "Cashier";
 
                 //Clear Up Text
                 total.Clear();
@@ -214,6 +220,9 @@ namespace PosSystem
                     addItemsToBill.Enabled = true;
                     returning.Enabled = true;
                     payment.Enabled = true;
+                    barcode.Enabled = true;
+
+                    //Total Price, Discount and Quantity
                 }
             }
             catch(Exception ex)
@@ -235,11 +244,72 @@ namespace PosSystem
         {
             try
             {
+                //Total Price, Discount and Quantity
+                decimal PRICE = 0;
+                decimal DISCOUNT = 0;
+                decimal PRICEBD = 0;
+                int QUANTITY = 0;
+                int returnPrice = 0;
+                bool Available = false;
+
                 //DB Connection
                 Connection conn = new Connection();
                 conn.db_connect();
 
                 SqlCommand cmd = new SqlCommand(); //SQL command reader
+
+                cmd.Connection = Connection.con;
+                cmd.CommandText = "USE pos SELECT billnumber FROM bill WHERE billnumber = '" + billNumber.Text.Trim() + "';";
+                SqlDataReader read0 = cmd.ExecuteReader();
+                read0.Read();
+                if (read0.HasRows)
+                {
+                    Available = true;
+                }
+                read0.Close();
+
+                //If Available is true
+
+                if (Available)
+                {
+                    cmd.Connection = Connection.con;
+                    cmd.CommandText = "USE pos DELETE FROM temp_bill;";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.Connection = Connection.con;
+                    cmd.CommandText = "USE pos DELETE FROM temp_return;";
+                    cmd.ExecuteNonQuery();
+
+                    //Grand Summary
+                    TotalBill.Text = "0";
+                    total.Text = "0";
+                    totalBeforeDiscount.Text = "0";
+                    totalDiscount.Text = "0";
+                    noUnits.Text = "0";
+                    returnItemsPrice.Text = "0";
+
+                    //Select Max itemcode
+                    cmd.Connection = Connection.con;
+                    cmd.CommandText = "USE pos SELECT billnumber FROM bill WHERE billnumber = (SELECT MAX(billnumber) FROM bill);";
+                    SqlDataReader read1 = cmd.ExecuteReader();
+
+                    //Set userId
+                    if (read1.Read() == false)
+                    {
+                        billNumber.Text = "1000000001";
+                    }
+                    else
+                    {
+                        int value = int.Parse(read1["billnumber"].ToString().Trim()) + 1;
+                        billNumber.Text = value.ToString();
+                    }
+                    read1.Close();
+
+                    cancelBill.Enabled = true;
+                    addItemsToBill.Enabled = true;
+                    returning.Enabled = true;
+                    payment.Enabled = true;
+                }
 
                 //View in data grud view
                 cmd.Connection = Connection.con;
@@ -250,7 +320,7 @@ namespace PosSystem
                 dataAdapBill.Fill(dataTableBill);
                 billingItem.DataSource = dataTableBill;
 
-                int returnPrice = 0;
+                
                 int netPrice = 0;
                 //Get ALL from temp_bill
                 cmd.Connection = Connection.con;
@@ -264,6 +334,7 @@ namespace PosSystem
                         //Total Price
                         int prices = (int)Math.Floor(readSUM.GetDecimal(readSUM.GetOrdinal("PRICE")));
                         returnPrice = prices;
+                        returnItemsPrice.Text = val;
                     }
                 }
                 readSUM.Close();
@@ -277,11 +348,7 @@ namespace PosSystem
                 dataAdapOfBill.SelectCommand = cmd;
                 dataAdapOfBill.Fill(dataTableOfBill);
 
-                //Total Price, Discount and Quantity
-                decimal PRICE = 0;
-                decimal DISCOUNT = 0;
-                decimal PRICEBD = 0;
-                int QUANTITY = 0;
+                
 
                 foreach (DataRow row in dataTableOfBill.Rows)
                 {
@@ -296,7 +363,7 @@ namespace PosSystem
                 }
 
                 //Grand Summary
-                TotalBill.Text = PRICE.ToString().Trim();
+                TotalBill.Text = (PRICE - returnPrice).ToString().Trim();
                 total.Text = PRICE.ToString().Trim();
                 totalBeforeDiscount.Text = PRICEBD.ToString().Trim();
                 totalDiscount.Text = DISCOUNT.ToString().Trim();
@@ -796,7 +863,7 @@ namespace PosSystem
 
                 if (avilable)
                 {
-                    Payment_Method f6 = new Payment_Method(billNumber.Text.Trim(), TotalBill.Text.Trim());
+                    Pay f6 = new Pay(billNumber.Text.Trim(), Username);
                     f6.ShowDialog();
                     Visible = true;
                 }
@@ -882,6 +949,7 @@ namespace PosSystem
                         addItemsToBill.Enabled = false;
                         returning.Enabled = false;
                         payment.Enabled = false;
+                        barcode.Enabled = false;
 
                         conn.db_connect_close(); ///DB connection close
                     }
@@ -904,5 +972,6 @@ namespace PosSystem
                 MessageBox.Show(errorMessage, error);
             }
         }
+
     }
 }

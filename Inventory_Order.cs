@@ -13,11 +13,12 @@ namespace PosSystem
 {
     public partial class Inventory_Order : UserControl
     {
-        string session = "piyumal";
+        string session;
         int rowCount = 0; 
-        public Inventory_Order()
+        public Inventory_Order(string JRole)
         {
             InitializeComponent();
+            session = JRole;
         }
 
         private void Inventory_Order_Load(object sender, EventArgs e)
@@ -119,6 +120,7 @@ namespace PosSystem
         {
             try
             {
+                //WhatsApp WA = new WhatsApp(orderDescription.Text.Trim(), "0000", "Style NewAge Narammala", true);
                 string availableOrder = ""; //OrderId store for condition
 
                 //DB Connection
@@ -660,7 +662,6 @@ namespace PosSystem
                     if (read.HasRows)
                     {
                         orderCode.Text = read["orderid"].ToString().Trim();
-                        orderIdConfirm.Text = read["orderid"].ToString();
                         //quantity
                         quantity.Text = read["quantity"].ToString().Trim();
                         //Supplier Selection
@@ -670,7 +671,6 @@ namespace PosSystem
                         totalPrice.Text = total.ToString().Trim();
 
                         orderDescription.Text = read["description"].ToString().Trim();
-                        orderDesConfirm.Text = read["description"].ToString().Trim();
                     }
                     else
                     {

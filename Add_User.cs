@@ -12,12 +12,13 @@ namespace PosSystem
     public partial class Add_User : UserControl
     {
         string imageLocation;
-        string session = "Piyumal";
+        string session;
         int rowCount;
 
-        public Add_User()
+        public Add_User(string JRole)
         {
             InitializeComponent();
+            session = JRole;
         }
 
         private void imgUpload_Click(object sender, EventArgs e)
@@ -296,243 +297,253 @@ namespace PosSystem
 
         private void UpdateEmployee_Click(object sender, EventArgs e)
         {
-            try
+            if ("10001" != userId.Text.Trim())
             {
-                //YesNo Message box
-                string message = "Are you sure want to update?";
-                string title = "Update";
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show(message, title, buttons);
-                if (result == DialogResult.Yes)
+                try
                 {
-                    //DB Connection
-                    Connection conn = new Connection();
-                    conn.db_connect();
-                    SqlCommand cmd = new SqlCommand(); //SQL command reader
-
-                    //Gender selection
-                    string Gender = "";
-                    bool maleChecked = male.Checked;
-                    bool femaleChecked = female.Checked;
-                    if (maleChecked)
-                        Gender = male.Text;
-                    else if (femaleChecked)
+                    //YesNo Message box
+                    string message = "Are you sure want to update?";
+                    string title = "Update";
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show(message, title, buttons);
+                    if (result == DialogResult.Yes)
                     {
-                        Gender = female.Text;
-                    }
+                        //DB Connection
+                        Connection conn = new Connection();
+                        conn.db_connect();
+                        SqlCommand cmd = new SqlCommand(); //SQL command reader
 
-                    //Validate the inputs
-                    user User = new user(userId.Text.Trim(), nic.Text.Trim(), firstName.Text.Trim(), lastName.Text.Trim(), fullName.Text.Trim(), address.Text.Trim(), contact.Text.Trim(), username.Text.Trim(), role.Text, password.Text.Trim(), status.Text, Gender);
-
-                    //Set today date 'yyyy-MM-dd' format
-                    var date = DateTime.Now;
-                    string todayDate = date.ToString("yyyy-MM-dd");
-
-                    //Retype Password
-                    string RePassword = re_password.Text.Trim();
-
-
-                    if (User.Nic != "0" && User.FirstName != "0" && User.LastName != "0" && User.FullName != "0" && User.Address != "0" && User.Contact != "0" && User.Username != "0" && User.Password != "0" && RePassword != null && User.Role != "0" && User.Status != "0" && User.Gender != "0" && imagePreviwer.Image != null)
-                    {
-                        if (User.Password == RePassword)
+                        //Gender selection
+                        string Gender = "";
+                        bool maleChecked = male.Checked;
+                        bool femaleChecked = female.Checked;
+                        if (maleChecked)
+                            Gender = male.Text;
+                        else if (femaleChecked)
                         {
-                            //Find out username and NIC is available 
-                            string availableNic = ""; //database passing nic
-                            string availableUsername = ""; //database passing username
-                            string availableContact = ""; //database passing contactno
-                            string employeeID = ""; //database passing employeeid
+                            Gender = female.Text;
+                        }
 
-                            //Get EmployeeID  from Database
-                            cmd.Connection = Connection.con;
-                            cmd.CommandText = "USE pos SELECT employeeid FROM employee WHERE employeeid = '" + User.UserId + "';";
-                            SqlDataReader read0 = cmd.ExecuteReader();
-                            if (read0.Read())
-                            {
-                                employeeID = read0["employeeid"].ToString().Trim();
-                            }
-                            read0.Close();
+                        //Validate the inputs
+                        user User = new user(userId.Text.Trim(), nic.Text.Trim(), firstName.Text.Trim(), lastName.Text.Trim(), fullName.Text.Trim(), address.Text.Trim(), contact.Text.Trim(), username.Text.Trim(), role.Text, password.Text.Trim(), status.Text, Gender);
 
-                            //Get NIC form Database
-                            cmd.Connection = Connection.con;
-                            cmd.CommandText = "USE pos SELECT nic FROM employee WHERE nic = '" + User.UserId + "' AND employeeid != '" + User.UserId + "'; ";
-                            SqlDataReader read = cmd.ExecuteReader();
-                            if (read.Read())
-                            {
-                                availableNic = read["nic"].ToString().Trim();
-                            }
-                            read.Close();
+                        //Set today date 'yyyy-MM-dd' format
+                        var date = DateTime.Now;
+                        string todayDate = date.ToString("yyyy-MM-dd");
 
-                            //Get Username form Database
-                            cmd.Connection = Connection.con;
-                            cmd.CommandText = "USE pos SELECT username FROM employee WHERE username = '" + User.Username + "'AND employeeid != '" + User.UserId + "'; ";
-                            SqlDataReader read1 = cmd.ExecuteReader();
-                            if (read1.Read())
-                            {
-                                availableUsername = read1["username"].ToString().Trim();
-                            }
-                            read1.Close();
+                        //Retype Password
+                        string RePassword = re_password.Text.Trim();
 
-                            //Get contact form Database
-                            cmd.Connection = Connection.con;
-                            cmd.CommandText = "USE pos SELECT contactno FROM employee WHERE contactno = '" + User.Contact + "' AND employeeid != '" + User.UserId + "'; ";
-                            SqlDataReader read2 = cmd.ExecuteReader();
-                            if (read2.Read())
-                            {
-                                availableContact = read2["contactno"].ToString().Trim();
-                            }
-                            read2.Close();
 
-                            //Condition for EmployeeID
-                            if (employeeID == User.UserId)
+                        if (User.Nic != "0" && User.FirstName != "0" && User.LastName != "0" && User.FullName != "0" && User.Address != "0" && User.Contact != "0" && User.Username != "0" && User.Password != "0" && RePassword != null && User.Role != "0" && User.Status != "0" && User.Gender != "0" && imagePreviwer.Image != null)
+                        {
+                            if (User.Password == RePassword)
                             {
-                                //Condition for NIC
-                                if (availableNic != User.Nic)
+                                //Find out username and NIC is available 
+                                string availableNic = ""; //database passing nic
+                                string availableUsername = ""; //database passing username
+                                string availableContact = ""; //database passing contactno
+                                string employeeID = ""; //database passing employeeid
+
+                                //Get EmployeeID  from Database
+                                cmd.Connection = Connection.con;
+                                cmd.CommandText = "USE pos SELECT employeeid FROM employee WHERE employeeid = '" + User.UserId + "';";
+                                SqlDataReader read0 = cmd.ExecuteReader();
+                                if (read0.Read())
                                 {
-                                    //Condition for Username
-                                    if (availableUsername != User.Username)
+                                    employeeID = read0["employeeid"].ToString().Trim();
+                                }
+                                read0.Close();
+
+                                //Get NIC form Database
+                                cmd.Connection = Connection.con;
+                                cmd.CommandText = "USE pos SELECT nic FROM employee WHERE nic = '" + User.UserId + "' AND employeeid != '" + User.UserId + "'; ";
+                                SqlDataReader read = cmd.ExecuteReader();
+                                if (read.Read())
+                                {
+                                    availableNic = read["nic"].ToString().Trim();
+                                }
+                                read.Close();
+
+                                //Get Username form Database
+                                cmd.Connection = Connection.con;
+                                cmd.CommandText = "USE pos SELECT username FROM employee WHERE username = '" + User.Username + "'AND employeeid != '" + User.UserId + "'; ";
+                                SqlDataReader read1 = cmd.ExecuteReader();
+                                if (read1.Read())
+                                {
+                                    availableUsername = read1["username"].ToString().Trim();
+                                }
+                                read1.Close();
+
+                                //Get contact form Database
+                                cmd.Connection = Connection.con;
+                                cmd.CommandText = "USE pos SELECT contactno FROM employee WHERE contactno = '" + User.Contact + "' AND employeeid != '" + User.UserId + "'; ";
+                                SqlDataReader read2 = cmd.ExecuteReader();
+                                if (read2.Read())
+                                {
+                                    availableContact = read2["contactno"].ToString().Trim();
+                                }
+                                read2.Close();
+
+                                //Condition for EmployeeID
+                                if (employeeID == User.UserId)
+                                {
+                                    //Condition for NIC
+                                    if (availableNic != User.Nic)
                                     {
-                                        //Condition for Contact
-                                        if (availableContact != User.Contact)
+                                        //Condition for Username
+                                        if (availableUsername != User.Username)
                                         {
-                                            
-
-                                            if(imageLocation == null)
+                                            //Condition for Contact
+                                            if (availableContact != User.Contact)
                                             {
-                                                //Input to the Database 
+
+
+                                                if (imageLocation == null)
+                                                {
+                                                    //Input to the Database 
+                                                    cmd.Connection = Connection.con;
+                                                    cmd.CommandText = "USE pos UPDATE employee SET nic = '" + User.Nic + "', firstname = '" + User.FirstName + "', lastname = '" + User.LastName + "', fullname = '" + User.FullName + "', username = '" + User.Username + "', password = '" + User.Password + "', address = '" + User.Address + "', contactno = '" + User.Contact + "', status = '" + User.Status + "', role = '" + User.Role + "', gender = '" + User.Gender + "', updateddate = '" + DateTime.Parse(dateSet.Text) + "', updator = '" + session + "' WHERE employeeid = '" + User.UserId + "';";
+                                                    cmd.ExecuteNonQuery();
+                                                }
+                                                else
+                                                {
+                                                    //Image setting
+                                                    byte[] picture = null;
+                                                    FileStream fileStream = new FileStream(imageLocation, FileMode.Open, FileAccess.Read);
+                                                    BinaryReader binaryReader = new BinaryReader(fileStream);
+                                                    picture = binaryReader.ReadBytes((int)fileStream.Length);
+
+                                                    //Input to the Database 
+                                                    cmd.Connection = Connection.con;
+                                                    cmd.CommandText = "USE pos UPDATE employee SET nic = '" + User.Nic + "', firstname = '" + User.FirstName + "', lastname = '" + User.LastName + "', fullname = '" + User.FullName + "', username = '" + User.Username + "', password = '" + User.Password + "', address = '" + User.Address + "', contactno = '" + User.Contact + "', status = '" + User.Status + "', role = '" + User.Role + "', gender = '" + User.Gender + "', picture = @pic , updateddate = '" + DateTime.Parse(dateSet.Text) + "', updator = '" + session + "' WHERE employeeid = '" + User.UserId + "';";
+                                                    cmd.Parameters.Add(new SqlParameter("@pic", picture));
+                                                    cmd.ExecuteNonQuery();
+                                                }
+
+                                                // View in data grud view
                                                 cmd.Connection = Connection.con;
-                                                cmd.CommandText = "USE pos UPDATE employee SET nic = '" + User.Nic + "', firstname = '" + User.FirstName + "', lastname = '" + User.LastName + "', fullname = '" + User.FullName + "', username = '" + User.Username + "', password = '" + User.Password + "', address = '" + User.Address + "', contactno = '" + User.Contact + "', status = '" + User.Status + "', role = '" + User.Role + "', gender = '" + User.Gender + "', updateddate = '" + DateTime.Parse(dateSet.Text) + "', updator = '" + session + "' WHERE employeeid = '" + User.UserId + "';";
-                                                cmd.ExecuteNonQuery();
+                                                cmd.CommandText = "USE pos SELECT employeeid AS EmployeeID, firstname AS FirstName, lastname AS LastName, fullname AS FullName, nic AS NIC, address AS Address, contactno AS Contact, gender AS Gender, role AS Role, status AS Status, date as AddingDate  FROM employee ORDER BY employeeid DESC;";
+                                                SqlDataAdapter dataAdap = new SqlDataAdapter();
+                                                DataTable dataTable = new DataTable();
+                                                dataAdap.SelectCommand = cmd;
+                                                dataAdap.Fill(dataTable);
+                                                employeeDataView.DataSource = dataTable;
+
+                                                //Successful Added Message
+                                                MessageBox.Show($"{User.FirstName} {User.LastName} successfully Updated!");
+
+                                                //Set the UserID Values
+                                                cmd.Connection = Connection.con;
+                                                cmd.CommandText = "USE pos SELECT employeeid FROM employee WHERE employeeid = (SELECT MAX(employeeid) FROM employee);";
+                                                SqlDataReader read3 = cmd.ExecuteReader();
+
+                                                //Set userId
+                                                if (read3.Read() == false)
+                                                {
+                                                    userId.Text = "10001";
+                                                }
+                                                else
+                                                {
+                                                    int value = int.Parse(read3["employeeid"].ToString().Trim()) + 1;
+                                                    userId.Text = value.ToString();
+                                                }
+                                                read3.Close();
+
+                                                //Reset the form
+                                                nic.Clear();
+                                                firstName.Clear();
+                                                lastName.Clear();
+                                                fullName.Clear();
+                                                address.Clear();
+                                                contact.Clear();
+                                                username.Clear();
+                                                password.Clear();
+                                                re_password.Clear();
+                                                status.SelectedIndex = -1;
+                                                role.SelectedIndex = -1;
+                                                male.Checked = false;
+                                                female.Checked = false;
+                                                imagePreviwer.Image = null;
+
+                                                //Database connection close
+                                                conn.db_connect_close();
                                             }
                                             else
                                             {
-                                                //Image setting
-                                                byte[] picture = null;
-                                                FileStream fileStream = new FileStream(imageLocation, FileMode.Open, FileAccess.Read);
-                                                BinaryReader binaryReader = new BinaryReader(fileStream);
-                                                picture = binaryReader.ReadBytes((int)fileStream.Length);
-
-                                                //Input to the Database 
-                                                cmd.Connection = Connection.con;
-                                                cmd.CommandText = "USE pos UPDATE employee SET nic = '" + User.Nic + "', firstname = '" + User.FirstName + "', lastname = '" + User.LastName + "', fullname = '" + User.FullName + "', username = '" + User.Username + "', password = '" + User.Password + "', address = '" + User.Address + "', contactno = '" + User.Contact + "', status = '" + User.Status + "', role = '" + User.Role + "', gender = '" + User.Gender + "', picture = @pic , updateddate = '" + DateTime.Parse(dateSet.Text) + "', updator = '" + session + "' WHERE employeeid = '" + User.UserId + "';";
-                                                cmd.Parameters.Add(new SqlParameter("@pic", picture));
-                                                cmd.ExecuteNonQuery();
+                                                string errorMessage = "This Contact already exist in the system!";
+                                                string error = "Warning";
+                                                MessageBox.Show(errorMessage, error);
                                             }
-
-                                            // View in data grud view
-                                            cmd.Connection = Connection.con;
-                                            cmd.CommandText = "USE pos SELECT employeeid AS EmployeeID, firstname AS FirstName, lastname AS LastName, fullname AS FullName, nic AS NIC, address AS Address, contactno AS Contact, gender AS Gender, role AS Role, status AS Status, date as AddingDate  FROM employee ORDER BY employeeid DESC;";
-                                            SqlDataAdapter dataAdap = new SqlDataAdapter();
-                                            DataTable dataTable = new DataTable();
-                                            dataAdap.SelectCommand = cmd;
-                                            dataAdap.Fill(dataTable);
-                                            employeeDataView.DataSource = dataTable;
-
-                                            //Successful Added Message
-                                            MessageBox.Show($"{User.FirstName} {User.LastName} successfully Updated!");
-
-                                            //Set the UserID Values
-                                            cmd.Connection = Connection.con;
-                                            cmd.CommandText = "USE pos SELECT employeeid FROM employee WHERE employeeid = (SELECT MAX(employeeid) FROM employee);";
-                                            SqlDataReader read3 = cmd.ExecuteReader();
-
-                                            //Set userId
-                                            if (read3.Read() == false)
-                                            {
-                                                userId.Text = "10001";
-                                            }
-                                            else
-                                            {
-                                                int value = int.Parse(read3["employeeid"].ToString().Trim()) + 1;
-                                                userId.Text = value.ToString();
-                                            }
-                                            read3.Close();
-
-                                            //Reset the form
-                                            nic.Clear();
-                                            firstName.Clear();
-                                            lastName.Clear();
-                                            fullName.Clear();
-                                            address.Clear();
-                                            contact.Clear();
-                                            username.Clear();
-                                            password.Clear();
-                                            re_password.Clear();
-                                            status.SelectedIndex = -1;
-                                            role.SelectedIndex = -1;
-                                            male.Checked = false;
-                                            female.Checked = false;
-                                            imagePreviwer.Image = null;
-
-                                            //Database connection close
-                                            conn.db_connect_close();
                                         }
                                         else
                                         {
-                                            string errorMessage = "This Contact already exist in the system!";
+                                            string errorMessage = "This Username already exist in the system!";
                                             string error = "Warning";
                                             MessageBox.Show(errorMessage, error);
                                         }
                                     }
                                     else
                                     {
-                                        string errorMessage = "This Username already exist in the system!";
+                                        string errorMessage = "This NIC already exist in the system!";
                                         string error = "Warning";
                                         MessageBox.Show(errorMessage, error);
                                     }
                                 }
                                 else
                                 {
-                                    string errorMessage = "This NIC already exist in the system!";
-                                    string error = "Warning";
-                                    MessageBox.Show(errorMessage, error);
+                                    string warningMessage = "This User ID is not available in Database!";
+                                    string warning = "Warning";
+                                    MessageBox.Show(warningMessage, warning);
+
+                                    //Reset the form
+                                    nic.Clear();
+                                    firstName.Clear();
+                                    lastName.Clear();
+                                    fullName.Clear();
+                                    address.Clear();
+                                    contact.Clear();
+                                    username.Clear();
+                                    password.Clear();
+                                    re_password.Clear();
+                                    status.SelectedIndex = -1;
+                                    role.SelectedIndex = -1;
+                                    male.Checked = false;
+                                    female.Checked = false;
+                                    imagePreviwer.Image = null;
                                 }
+
                             }
                             else
                             {
-                                string warningMessage = "This User ID is not available in Database!";
-                                string warning = "Warning";
-                                MessageBox.Show(warningMessage, warning);
-
-                                //Reset the form
-                                nic.Clear();
-                                firstName.Clear();
-                                lastName.Clear();
-                                fullName.Clear();
-                                address.Clear();
-                                contact.Clear();
-                                username.Clear();
-                                password.Clear();
-                                re_password.Clear();
-                                status.SelectedIndex = -1;
-                                role.SelectedIndex = -1;
-                                male.Checked = false;
-                                female.Checked = false;
-                                imagePreviwer.Image = null;
+                                string errorMessage = "Passwords are not matched!";
+                                string error = "Warning";
+                                MessageBox.Show(errorMessage, error);
                             }
-                            
                         }
                         else
                         {
-                            string errorMessage = "Passwords are not matched!";
-                            string error = "Warning";
-                            MessageBox.Show(errorMessage, error);
+                            string Message = "Input feild(s) are Empty or Not Valid, \nPlease checked the fields!";
+                            string warning = "Warning";
+                            MessageBox.Show(Message, warning);
                         }
                     }
-                    else
-                    {
-                        string Message = "Input feild(s) are Empty or Not Valid, \nPlease checked the fields!";
-                        string warning = "Warning";
-                        MessageBox.Show(Message, warning);
-                    }
-                }
 
+                }
+                catch (Exception ex)
+                {
+                    string errorMessage = ex.Message;
+                    string error = "Error";
+                    MessageBox.Show(errorMessage, error);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                string errorMessage = ex.Message;
-                string error = "Error";
-                MessageBox.Show(errorMessage, error);
+                string Message = "Cannot Change UserID '10001'";
+                string warning = "Warning!";
+                MessageBox.Show(Message, warning);
             }
+            
         }
 
         private void deleteEmployee_Click(object sender, EventArgs e)

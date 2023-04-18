@@ -528,7 +528,7 @@
             this.groupBox3.Location = new System.Drawing.Point(98, 0);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(885, 185);
-            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             // 
             // label14
@@ -543,12 +543,13 @@
             // 
             // barcode
             // 
+            this.barcode.Enabled = false;
             this.barcode.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barcode.Location = new System.Drawing.Point(700, 127);
             this.barcode.MaxLength = 7;
             this.barcode.Name = "barcode";
             this.barcode.Size = new System.Drawing.Size(170, 37);
-            this.barcode.TabIndex = 51;
+            this.barcode.TabIndex = 0;
             this.barcode.TextChanged += new System.EventHandler(this.barcode_TextChanged);
             // 
             // TotalBill

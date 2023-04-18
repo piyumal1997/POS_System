@@ -153,6 +153,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.close);
             this.Name = "Qunatity_Changer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Qunatity_Changer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

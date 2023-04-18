@@ -77,9 +77,51 @@ namespace PosSystem
                 string Username = userName.Text.Trim();
                 string Password = password.Text.Trim();
 
-                AdminDash f2 = new AdminDash();
-                f2.Show();
-                Visible = false;
+                cmd.Connection = Connection.con;
+                cmd.CommandText = "USE pos SELECT * FROM employee WHERE username = '" + userName.Text.Trim() + "' AND password = '" + password.Text.Trim() + "';";
+                SqlDataReader read0 = cmd.ExecuteReader();
+                read0.Read();
+                if (read0.HasRows)
+                {
+                    string Status = read0["status"].ToString().Trim();
+                    if (Status == "Active")
+                    {
+                        if (read0["role"].ToString().Trim() == "Owner")
+                        {
+                            AdminDash f2 = new AdminDash(read0["username"].ToString().Trim(), read0["firstname"].ToString().Trim(), read0["role"].ToString().Trim());
+                            f2.Show();
+                            Visible = false;
+                        }
+                        else
+                        {
+                            Cashier_Form f2 = new Cashier_Form(read0["username"].ToString().Trim(), read0["firstname"].ToString().Trim(), read0["role"].ToString().Trim());
+                            f2.Show();
+                            Visible = false;
+                        }
+                        
+                    }
+                    else
+                    {
+                        string Message = "Your account is dissabled!";
+                        string warning = "Warning";
+                        MessageBox.Show(Message, warning);
+
+                        //Clear Inpute
+                        userName.Clear();
+                        password.Clear();
+                    }
+                }
+                else
+                {
+                    string Message = "Username or Password is Incorrect, Please try agin!";
+                    string warning = "Warning";
+                    MessageBox.Show(Message, warning);
+
+                    //Clear Inpute
+                    userName.Clear();
+                    password.Clear();
+                }
+                read0.Close();
 
                 conn.db_connect_close();//DB Connection Close
             }

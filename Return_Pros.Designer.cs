@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.clear = new System.Windows.Forms.Button();
             this.itemNumber = new System.Windows.Forms.MaskedTextBox();
-            this.billNumber = new System.Windows.Forms.MaskedTextBox();
+            this.BillNumber = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.todaySalesView = new System.Windows.Forms.DataGridView();
@@ -64,7 +64,7 @@
             // 
             this.groupBox1.Controls.Add(this.clear);
             this.groupBox1.Controls.Add(this.itemNumber);
-            this.groupBox1.Controls.Add(this.billNumber);
+            this.groupBox1.Controls.Add(this.BillNumber);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(15, 14);
@@ -82,6 +82,7 @@
             this.clear.TabIndex = 21;
             this.clear.Text = "Reset";
             this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // itemNumber
             // 
@@ -94,16 +95,16 @@
             this.itemNumber.TabIndex = 20;
             this.itemNumber.TextChanged += new System.EventHandler(this.itemNumber_TextChanged);
             // 
-            // billNumber
+            // BillNumber
             // 
-            this.billNumber.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.billNumber.Location = new System.Drawing.Point(120, 23);
-            this.billNumber.Mask = "0000000000";
-            this.billNumber.Name = "billNumber";
-            this.billNumber.PromptChar = ' ';
-            this.billNumber.Size = new System.Drawing.Size(145, 31);
-            this.billNumber.TabIndex = 17;
-            this.billNumber.TextChanged += new System.EventHandler(this.billNumber_TextChanged);
+            this.BillNumber.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BillNumber.Location = new System.Drawing.Point(120, 23);
+            this.BillNumber.Mask = "0000000000";
+            this.BillNumber.Name = "BillNumber";
+            this.BillNumber.PromptChar = ' ';
+            this.BillNumber.Size = new System.Drawing.Size(145, 31);
+            this.BillNumber.TabIndex = 17;
+            this.BillNumber.TextChanged += new System.EventHandler(this.billNumber_TextChanged);
             // 
             // label2
             // 
@@ -132,23 +133,24 @@
             this.todaySalesView.AllowUserToResizeRows = false;
             this.todaySalesView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.todaySalesView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.todaySalesView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.todaySalesView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.todaySalesView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.todaySalesView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.todaySalesView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.todaySalesView.DefaultCellStyle = dataGridViewCellStyle6;
             this.todaySalesView.Location = new System.Drawing.Point(21, 104);
             this.todaySalesView.MultiSelect = false;
             this.todaySalesView.Name = "todaySalesView";
@@ -157,6 +159,7 @@
             this.todaySalesView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.todaySalesView.Size = new System.Drawing.Size(704, 250);
             this.todaySalesView.TabIndex = 30;
+            this.todaySalesView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.todaySalesView_CellClick);
             // 
             // close
             // 
@@ -181,6 +184,7 @@
             this.SoldPrice.ReadOnly = true;
             this.SoldPrice.Size = new System.Drawing.Size(144, 40);
             this.SoldPrice.TabIndex = 34;
+            this.SoldPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
@@ -201,6 +205,7 @@
             this.ItemId.ReadOnly = true;
             this.ItemId.Size = new System.Drawing.Size(144, 40);
             this.ItemId.TabIndex = 32;
+            this.ItemId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label
             // 
@@ -220,23 +225,24 @@
             this.returnTempView.AllowUserToResizeRows = false;
             this.returnTempView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.returnTempView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.returnTempView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.returnTempView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.returnTempView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.returnTempView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.returnTempView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.returnTempView.DefaultCellStyle = dataGridViewCellStyle8;
             this.returnTempView.Location = new System.Drawing.Point(21, 422);
             this.returnTempView.MultiSelect = false;
             this.returnTempView.Name = "returnTempView";
@@ -245,6 +251,7 @@
             this.returnTempView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.returnTempView.Size = new System.Drawing.Size(704, 235);
             this.returnTempView.TabIndex = 38;
+            this.returnTempView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.returnTempView_CellClick);
             // 
             // addReturn
             // 
@@ -272,6 +279,7 @@
             this.removeReturn.TabIndex = 40;
             this.removeReturn.Text = "Remove";
             this.removeReturn.UseVisualStyleBackColor = false;
+            this.removeReturn.Click += new System.EventHandler(this.removeReturn_Click);
             // 
             // returnItem
             // 
@@ -281,6 +289,7 @@
             this.returnItem.ReadOnly = true;
             this.returnItem.Size = new System.Drawing.Size(144, 40);
             this.returnItem.TabIndex = 41;
+            this.returnItem.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -326,6 +335,7 @@
             this.billNum.ReadOnly = true;
             this.billNum.Size = new System.Drawing.Size(144, 40);
             this.billNum.TabIndex = 45;
+            this.billNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
@@ -346,6 +356,7 @@
             this.returnBill.ReadOnly = true;
             this.returnBill.Size = new System.Drawing.Size(144, 40);
             this.returnBill.TabIndex = 47;
+            this.returnBill.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label7
             // 
@@ -400,7 +411,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.MaskedTextBox itemNumber;
-        private System.Windows.Forms.MaskedTextBox billNumber;
+        private System.Windows.Forms.MaskedTextBox BillNumber;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView todaySalesView;

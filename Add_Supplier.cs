@@ -17,11 +17,12 @@ namespace PosSystem
 {
     public partial class Add_Supplier : UserControl
     {
-        string session = "Piyumal";
+        string session;
         int rowCount;
-        public Add_Supplier()
+        public Add_Supplier(string JRole)
         {
             InitializeComponent();
+            session = JRole;
         }
 
         private void Add_Sipplier_Load(object sender, EventArgs e)

@@ -45,7 +45,7 @@
             this.close.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.close.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.close.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.close.Location = new System.Drawing.Point(442, 12);
+            this.close.Location = new System.Drawing.Point(464, 12);
             this.close.Name = "close";
             this.close.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.close.Size = new System.Drawing.Size(40, 40);
@@ -58,7 +58,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(90, 142);
+            this.label3.Location = new System.Drawing.Point(93, 141);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 29);
             this.label3.TabIndex = 18;
@@ -68,7 +68,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(90, 94);
+            this.label2.Location = new System.Drawing.Point(93, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 29);
             this.label2.TabIndex = 17;
@@ -77,19 +77,19 @@
             // Amount
             // 
             this.Amount.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Amount.Location = new System.Drawing.Point(244, 142);
+            this.Amount.Location = new System.Drawing.Point(247, 141);
             this.Amount.Name = "Amount";
             this.Amount.ReadOnly = true;
-            this.Amount.Size = new System.Drawing.Size(175, 33);
+            this.Amount.Size = new System.Drawing.Size(180, 33);
             this.Amount.TabIndex = 16;
             // 
             // BillNum
             // 
             this.BillNum.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BillNum.Location = new System.Drawing.Point(244, 94);
+            this.BillNum.Location = new System.Drawing.Point(247, 93);
             this.BillNum.Name = "BillNum";
             this.BillNum.ReadOnly = true;
-            this.BillNum.Size = new System.Drawing.Size(175, 33);
+            this.BillNum.Size = new System.Drawing.Size(180, 33);
             this.BillNum.TabIndex = 15;
             // 
             // label4
@@ -97,7 +97,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Indigo;
-            this.label4.Location = new System.Drawing.Point(90, 219);
+            this.label4.Location = new System.Drawing.Point(93, 215);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 29);
             this.label4.TabIndex = 21;
@@ -109,7 +109,7 @@
             this.ProcessBill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ProcessBill.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessBill.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ProcessBill.Location = new System.Drawing.Point(140, 285);
+            this.ProcessBill.Location = new System.Drawing.Point(142, 292);
             this.ProcessBill.Name = "ProcessBill";
             this.ProcessBill.Size = new System.Drawing.Size(239, 89);
             this.ProcessBill.TabIndex = 22;
@@ -122,11 +122,11 @@
             this.CashReceived.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CashReceived.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.CashReceived.HidePromptOnLeave = true;
-            this.CashReceived.Location = new System.Drawing.Point(244, 206);
+            this.CashReceived.Location = new System.Drawing.Point(247, 205);
             this.CashReceived.Mask = "000000";
             this.CashReceived.Name = "CashReceived";
             this.CashReceived.PromptChar = ' ';
-            this.CashReceived.Size = new System.Drawing.Size(175, 50);
+            this.CashReceived.Size = new System.Drawing.Size(180, 50);
             this.CashReceived.TabIndex = 23;
             // 
             // label1
@@ -134,7 +134,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(27, 21);
+            this.label1.Location = new System.Drawing.Point(32, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(310, 39);
             this.label1.TabIndex = 24;
@@ -144,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 404);
+            this.ClientSize = new System.Drawing.Size(516, 426);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CashReceived);

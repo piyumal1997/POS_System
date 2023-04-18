@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.close = new System.Windows.Forms.Button();
             this.todaySalesView = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -42,6 +42,8 @@
             this.todaySales = new System.Windows.Forms.TextBox();
             this.todaySellsQuantity = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.todayReturns = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.todaySalesView)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -68,23 +70,24 @@
             this.todaySalesView.AllowUserToResizeRows = false;
             this.todaySalesView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.todaySalesView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.todaySalesView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.todaySalesView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.todaySalesView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.todaySalesView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.todaySalesView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.todaySalesView.DefaultCellStyle = dataGridViewCellStyle10;
             this.todaySalesView.Location = new System.Drawing.Point(25, 123);
             this.todaySalesView.MultiSelect = false;
             this.todaySalesView.Name = "todaySalesView";
@@ -164,7 +167,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(772, 129);
+            this.label3.Location = new System.Drawing.Point(779, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 46);
             this.label3.TabIndex = 17;
@@ -179,7 +182,7 @@
             this.todaySales.ReadOnly = true;
             this.todaySales.Size = new System.Drawing.Size(144, 40);
             this.todaySales.TabIndex = 17;
-            this.todaySales.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.todaySales.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // todaySellsQuantity
             // 
@@ -189,18 +192,39 @@
             this.todaySellsQuantity.ReadOnly = true;
             this.todaySellsQuantity.Size = new System.Drawing.Size(144, 40);
             this.todaySellsQuantity.TabIndex = 18;
-            this.todaySellsQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.todaySellsQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(776, 240);
+            this.label4.Location = new System.Drawing.Point(782, 240);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(96, 46);
             this.label4.TabIndex = 19;
             this.label4.Text = "Today Sells\r\nQuantity";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // todayReturns
+            // 
+            this.todayReturns.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.todayReturns.Location = new System.Drawing.Point(757, 396);
+            this.todayReturns.Name = "todayReturns";
+            this.todayReturns.ReadOnly = true;
+            this.todayReturns.Size = new System.Drawing.Size(144, 40);
+            this.todayReturns.TabIndex = 20;
+            this.todayReturns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(782, 361);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(93, 23);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Today Bills";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DailySalesItem
             // 
@@ -208,6 +232,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 584);
             this.ControlBox = false;
+            this.Controls.Add(this.todayReturns);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.todaySellsQuantity);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.todaySales);
@@ -240,5 +266,7 @@
         private System.Windows.Forms.MaskedTextBox billNumber;
         private System.Windows.Forms.MaskedTextBox itemNumber;
         private System.Windows.Forms.Button clear;
+        private System.Windows.Forms.TextBox todayReturns;
+        private System.Windows.Forms.Label label5;
     }
 }

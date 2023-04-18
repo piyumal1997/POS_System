@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZXing;
+using ZXing.Common;
+using ZXing.OneD;
 
 namespace PosSystem
 {
@@ -22,7 +26,12 @@ namespace PosSystem
 
         private void printBarcode_Click(object sender, EventArgs e)
         {
-
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "PNG Files (*.png)|*.png|All Files (*.*)|*.*";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                BarcodePreview.Image.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+            }
         }
 
         private void Barcode_Generator_Load(object sender, EventArgs e)
@@ -85,6 +94,8 @@ namespace PosSystem
         {
             try
             {
+                string ItemSize = ""; //Item Size Holder
+
                 //DB Connection
                 Connection conn = new Connection();
                 conn.db_connect();
@@ -123,8 +134,89 @@ namespace PosSystem
                     itemCategory.Text = ItemCategory.Trim();
                     itemQuantity.Text = Quantity.Trim();
                     itemPrice.Text = Price.Trim();
+                    ItemSize = Size;
 
                     conn.db_connect_close(); //Connection Close
+                }
+
+                if (itemCode.Text.Length > 0)
+                {
+                    var headerHeight = 50;
+                    var footerHeight = 50;
+                    var barcodeWidth = 300;
+                    var barcodeHeight = 100;
+                    var totalWidth = barcodeWidth;
+                    var totalHeight = headerHeight + barcodeHeight + footerHeight;
+                    var totalBitmap = new Bitmap(totalWidth, totalHeight);
+                    var graphics = Graphics.FromImage(totalBitmap);
+                    graphics.FillRectangle(Brushes.White, 0, 0, totalWidth, totalHeight);
+
+                    var writer = new BarcodeWriter();
+                    writer.Format = BarcodeFormat.CODE_128;
+                    writer.Options.Width = barcodeWidth;
+                    writer.Options.Height = barcodeHeight;
+                    var barcodeBitmap = writer.Write(itemCode.Text.Trim());
+
+                    graphics.DrawImage(barcodeBitmap, (totalWidth - barcodeWidth) / 2, headerHeight);
+                    var headerText = itemBrand.Text.Trim() + " - " + itemCategory.Text.Trim() + " | " + ItemSize;
+                    var headerFont = new Font("Arial", 12);
+                    var headerSize = graphics.MeasureString(headerText, headerFont);
+                    graphics.DrawString(headerText, headerFont, Brushes.Black, new PointF((totalWidth - headerSize.Width) / 2, (headerHeight - headerSize.Height) / 2));
+                    var footerText = "Rs." + itemPrice.Text.Trim();
+                    var footerFont = new Font("Arial", 12);
+                    var footerSize = graphics.MeasureString(footerText, footerFont);
+                    graphics.DrawString(footerText, footerFont, Brushes.Black, new PointF((totalWidth - footerSize.Width) / 2, totalHeight - footerHeight + (footerHeight - footerSize.Height) / 2));
+
+                    //View in Picture Box
+                    BarcodePreview.Image = totalBitmap;
+
+
+
+                    //Thermal Barcode Label Printer
+
+                    //Printer = BIXOLON  Thermal Barcode Label Printer SLP-220 
+                    //Instal BIXOLON SDK and Connect to the printer
+
+                    /*
+                    var printer = new bxl_ftp();
+                    printer.OpenPrinter("SLP-220");
+
+                    //Barcode Writer
+                    var writer = new BarcodeWriter
+                    {
+                        Format = BarcodeFormat.CODE_128,
+                        Options = new EncodingOptions
+                        {
+                            Height = 50,
+                            Width = 200
+                        },
+                        Encoder = new Code128Writer()
+                    };
+                    var barcode = writer.Write(itemCode.Text.Trim());
+
+                    var bitmap = new Bitmap(300, 100);
+                    using (var graphics = Graphics.FromImage(bitmap))
+                    {
+                        graphics.Clear(Color.White);
+                        graphics.DrawImage(barcode, new Point(50, 10));
+                        graphics.DrawString("Header Text", new Font("Arial", 12), Brushes.Black, new PointF(50, 60));
+                        graphics.DrawString("Footer Text", new Font("Arial", 12), Brushes.Black, new PointF(50, 80));
+
+                        var headerText = itemBrand.Text.Trim() + " - " + itemCategory.Text.Trim() + " | " + ItemSize;
+                        var headerFont = new Font("Arial", 12);
+                        var headerSize = graphics.MeasureString(headerText, headerFont);
+                        graphics.DrawString(headerText, headerFont, Brushes.Black, new PointF(50,60));
+                        var footerText = "Rs." + itemPrice.Text.Trim();
+                        var footerFont = new Font("Arial", 12);
+                        var footerSize = graphics.MeasureString(footerText, footerFont);
+                        graphics.DrawString(footerText, footerFont, Brushes.Black, new PointF(50, 60));
+                    }
+
+                    var data = new byte[320 * 150];
+                    var size = bxl_common.GetBitmapData(bitmap, data, 320, 150);
+                    printer.SendData(data, size);
+                    printer.ClosePrinter();
+                    */
                 }
             }
             catch (Exception ex)
@@ -135,5 +227,17 @@ namespace PosSystem
             }
         }
 
+        private void clear_Click(object sender, EventArgs e)
+        {
+            //Clear all TextBoxes
+            itemCode.Clear();
+            itemBrand.Clear();
+            itemCategory.Clear();
+            itemQuantity.Clear();
+            itemPrice.Clear();
+
+            //Picture Box Clear
+            BarcodePreview.Image = null;
+        }
     }
 }

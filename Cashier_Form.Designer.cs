@@ -31,13 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cashier_Form));
             this.dashboard = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.user = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.logOut = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pos = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ItemSearch = new System.Windows.Forms.Button();
             this.panelContainer = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -59,10 +60,12 @@
             this.dashboard.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.dashboard.UseVisualStyleBackColor = false;
+            this.dashboard.Click += new System.EventHandler(this.dashboard_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel1.Controls.Add(this.user);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.logOut);
             this.panel1.Controls.Add(this.label1);
@@ -73,6 +76,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1366, 84);
             this.panel1.TabIndex = 5;
+            // 
+            // user
+            // 
+            this.user.AutoSize = true;
+            this.user.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.user.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.user.Location = new System.Drawing.Point(702, 30);
+            this.user.Name = "user";
+            this.user.Size = new System.Drawing.Size(125, 29);
+            this.user.TabIndex = 6;
+            this.user.Text = "User Name";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(625, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 29);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "User :";
             // 
             // logOut
             // 
@@ -91,6 +116,7 @@
             this.logOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.logOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.logOut.UseVisualStyleBackColor = false;
+            this.logOut.Click += new System.EventHandler(this.logOut_Click);
             // 
             // label1
             // 
@@ -120,6 +146,7 @@
             this.pos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.pos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.pos.UseVisualStyleBackColor = false;
+            this.pos.Click += new System.EventHandler(this.pos_Click);
             // 
             // panel2
             // 
@@ -154,17 +181,7 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(1156, 632);
             this.panelContainer.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Location = new System.Drawing.Point(369, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 26);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Priyanga";
+            this.panelContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContainer_Paint);
             // 
             // Cashier_Form
             // 
@@ -178,8 +195,8 @@
             this.MaximumSize = new System.Drawing.Size(1382, 755);
             this.MinimumSize = new System.Drawing.Size(1364, 736);
             this.Name = "Cashier_Form";
-            this.Text = "Cashier_Form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Cashier_Form_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -198,5 +215,6 @@
         private System.Windows.Forms.Panel panelContainer;
         private System.Windows.Forms.Button ItemSearch;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label user;
     }
 }

@@ -52,11 +52,14 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.printBarcode = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.BarcodePreview = new System.Windows.Forms.PictureBox();
+            this.clear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barcodeItems)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodePreview)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -103,7 +106,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.barcodeItems.DefaultCellStyle = dataGridViewCellStyle2;
-            this.barcodeItems.Location = new System.Drawing.Point(30, 194);
+            this.barcodeItems.Location = new System.Drawing.Point(30, 188);
             this.barcodeItems.MultiSelect = false;
             this.barcodeItems.Name = "barcodeItems";
             this.barcodeItems.ReadOnly = true;
@@ -111,7 +114,7 @@
             this.barcodeItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.barcodeItems.RowTemplate.Height = 26;
             this.barcodeItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.barcodeItems.Size = new System.Drawing.Size(600, 406);
+            this.barcodeItems.Size = new System.Drawing.Size(600, 425);
             this.barcodeItems.TabIndex = 1;
             this.barcodeItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.barcodeItems_CellClick);
             // 
@@ -123,7 +126,7 @@
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.brandSearchCom);
             this.groupBox2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(30, 74);
+            this.groupBox2.Location = new System.Drawing.Point(30, 70);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(600, 96);
             this.groupBox2.TabIndex = 10;
@@ -171,6 +174,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.groupBox1.Controls.Add(this.clear);
             this.groupBox1.Controls.Add(this.itemPrice);
             this.groupBox1.Controls.Add(this.itemQuantity);
             this.groupBox1.Controls.Add(this.label5);
@@ -182,9 +186,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.itemCode);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(680, 75);
+            this.groupBox1.Location = new System.Drawing.Point(667, 70);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(447, 230);
+            this.groupBox1.Size = new System.Drawing.Size(460, 239);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Barcode Details";
@@ -192,7 +196,7 @@
             // itemPrice
             // 
             this.itemPrice.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemPrice.Location = new System.Drawing.Point(188, 178);
+            this.itemPrice.Location = new System.Drawing.Point(154, 178);
             this.itemPrice.MaxLength = 25;
             this.itemPrice.Name = "itemPrice";
             this.itemPrice.ReadOnly = true;
@@ -202,7 +206,7 @@
             // itemQuantity
             // 
             this.itemQuantity.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemQuantity.Location = new System.Drawing.Point(188, 143);
+            this.itemQuantity.Location = new System.Drawing.Point(154, 143);
             this.itemQuantity.MaxLength = 25;
             this.itemQuantity.Name = "itemQuantity";
             this.itemQuantity.ReadOnly = true;
@@ -213,7 +217,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(46, 143);
+            this.label5.Location = new System.Drawing.Point(20, 143);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(118, 23);
             this.label5.TabIndex = 23;
@@ -222,7 +226,7 @@
             // itemBrand
             // 
             this.itemBrand.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemBrand.Location = new System.Drawing.Point(188, 106);
+            this.itemBrand.Location = new System.Drawing.Point(154, 106);
             this.itemBrand.MaxLength = 30;
             this.itemBrand.Name = "itemBrand";
             this.itemBrand.ReadOnly = true;
@@ -233,7 +237,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(46, 184);
+            this.label6.Location = new System.Drawing.Point(20, 184);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 23);
             this.label6.TabIndex = 6;
@@ -243,7 +247,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(46, 109);
+            this.label4.Location = new System.Drawing.Point(20, 109);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(96, 23);
             this.label4.TabIndex = 4;
@@ -253,7 +257,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(46, 72);
+            this.label3.Location = new System.Drawing.Point(20, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(119, 23);
             this.label3.TabIndex = 3;
@@ -262,7 +266,7 @@
             // itemCategory
             // 
             this.itemCategory.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemCategory.Location = new System.Drawing.Point(188, 69);
+            this.itemCategory.Location = new System.Drawing.Point(154, 69);
             this.itemCategory.MaxLength = 30;
             this.itemCategory.Name = "itemCategory";
             this.itemCategory.ReadOnly = true;
@@ -273,7 +277,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(46, 35);
+            this.label2.Location = new System.Drawing.Point(20, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 23);
             this.label2.TabIndex = 1;
@@ -282,7 +286,7 @@
             // itemCode
             // 
             this.itemCode.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemCode.Location = new System.Drawing.Point(188, 32);
+            this.itemCode.Location = new System.Drawing.Point(154, 32);
             this.itemCode.MaxLength = 25;
             this.itemCode.Name = "itemCode";
             this.itemCode.ReadOnly = true;
@@ -292,34 +296,58 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.groupBox3.Controls.Add(this.BarcodePreview);
             this.groupBox3.Controls.Add(this.printBarcode);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(680, 332);
+            this.groupBox3.Location = new System.Drawing.Point(667, 320);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(447, 268);
+            this.groupBox3.Size = new System.Drawing.Size(460, 293);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
             // 
             // printBarcode
             // 
-            this.printBarcode.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.printBarcode.Location = new System.Drawing.Point(170, 205);
+            this.printBarcode.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.printBarcode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.printBarcode.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printBarcode.Location = new System.Drawing.Point(148, 249);
             this.printBarcode.Name = "printBarcode";
-            this.printBarcode.Size = new System.Drawing.Size(161, 45);
+            this.printBarcode.Size = new System.Drawing.Size(159, 36);
             this.printBarcode.TabIndex = 32;
             this.printBarcode.Text = "Print Sticker";
-            this.printBarcode.UseVisualStyleBackColor = true;
+            this.printBarcode.UseVisualStyleBackColor = false;
             this.printBarcode.Click += new System.EventHandler(this.printBarcode_Click);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(142, 16);
+            this.label12.Location = new System.Drawing.Point(130, 10);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(189, 33);
             this.label12.TabIndex = 1;
             this.label12.Text = "Barcode Sticker";
+            // 
+            // BarcodePreview
+            // 
+            this.BarcodePreview.Location = new System.Drawing.Point(83, 46);
+            this.BarcodePreview.Name = "BarcodePreview";
+            this.BarcodePreview.Size = new System.Drawing.Size(300, 197);
+            this.BarcodePreview.TabIndex = 33;
+            this.BarcodePreview.TabStop = false;
+            // 
+            // clear
+            // 
+            this.clear.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.clear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.clear.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clear.Location = new System.Drawing.Point(370, 30);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(79, 33);
+            this.clear.TabIndex = 34;
+            this.clear.Text = "Clear";
+            this.clear.UseVisualStyleBackColor = false;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // Barcode_Generator
             // 
@@ -342,6 +370,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodePreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -370,5 +399,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button printBarcode;
+        private System.Windows.Forms.PictureBox BarcodePreview;
+        private System.Windows.Forms.Button clear;
     }
 }

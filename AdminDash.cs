@@ -12,12 +12,21 @@ namespace PosSystem
 {
     public partial class AdminDash : Form
     {
-        public AdminDash()
+        string Username;
+        string Firstname;
+        string JRole;
+        public AdminDash(String UN, String FN, String Role)
         {
             InitializeComponent();
             Dash_Admins au = new Dash_Admins();
             posUserControl(au);
 
+            user.Text = FN;
+
+            //Assign Passed Values
+            Username = UN;
+            Firstname = FN;
+            JRole = Role;
         }
 
         private void posUserControl(UserControl userControl)
@@ -47,7 +56,7 @@ namespace PosSystem
 
         private void addUser_Click(object sender, EventArgs e)
         {
-            Add_User au = new Add_User();
+            Add_User au = new Add_User(JRole);
             posUserControl(au);
         }
 
@@ -65,9 +74,9 @@ namespace PosSystem
 
         private void pos_Click(object sender, EventArgs e)
         {
-            Admin_Pos f3 = new Admin_Pos();
-            f3.Show();
-            Visible = false;
+            Admin_Pos f3 = new Admin_Pos(Username,JRole);
+            f3.ShowDialog();
+            Visible = true;
         }
 
         private void addCandB_Click(object sender, EventArgs e)
@@ -78,7 +87,7 @@ namespace PosSystem
 
         private void addSupplier_Click(object sender, EventArgs e)
         {
-            Add_Supplier au = new Add_Supplier();
+            Add_Supplier au = new Add_Supplier(JRole);
             posUserControl(au);
         }
 
@@ -90,7 +99,7 @@ namespace PosSystem
 
         private void orders_Click(object sender, EventArgs e)
         {
-            Inventory_Order au = new Inventory_Order();
+            Inventory_Order au = new Inventory_Order(JRole);
             posUserControl(au);
         }
 
@@ -113,7 +122,20 @@ namespace PosSystem
 
         private void logOut_Click(object sender, EventArgs e)
         {
-
+            string message = $"Are you sure want logout the system?";
+            string title = "Logout";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                loginForm f = new loginForm();
+                f.Show();
+                Visible = false;
+            }
+            else
+            {
+                //Do nothing
+            }
         }
     }
 }

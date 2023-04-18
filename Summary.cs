@@ -55,7 +55,7 @@ namespace PosSystem
                 read2.Read();
                 if (read2.HasRows)
                 {
-                    ZeroCount.Text = read2["count"].ToString().Trim();
+                    OneCount.Text = read2["count"].ToString().Trim();
                 }
                 read2.Close();
 
@@ -66,7 +66,7 @@ namespace PosSystem
                 read3.Read();
                 if (read3.HasRows)
                 {
-                    ZeroCount.Text = read3["total"].ToString().Trim();
+                    TotalItems.Text = read3["total"].ToString().Trim();
                 }
                 read3.Close();
 
@@ -77,7 +77,7 @@ namespace PosSystem
                 read4.Read();
                 if (read4.HasRows)
                 {
-                    ZeroCount.Text = read4["totbill"].ToString().Trim();
+                    TotalBill.Text = read4["totbill"].ToString().Trim();
                 }
                 read4.Close();
 

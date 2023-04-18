@@ -43,10 +43,10 @@ namespace PosSystem
             {
                 quantity.Text = "1";
             }
-            else
+            /*else
             {
                 quantity.Text = AddQuantity.ToString();
-            }
+            }*/
 
         }
 
@@ -65,7 +65,7 @@ namespace PosSystem
                 
                 SqlCommand cmd = new SqlCommand(); //SQL command reader
 
-                //View in data grid view
+                //Get Data From billitem
                 cmd.Connection = Connection.con;
                 cmd.CommandText = "USE pos SELECT quantity FROM billitem WHERE itemid = '" + code.Text.Trim() + "' AND billnumber = '" + bill + "';";
                 SqlDataReader read = cmd.ExecuteReader();
@@ -87,7 +87,7 @@ namespace PosSystem
                 {
                     string available = "";
 
-                    //View in data grud view
+                    //Get Data From temp_return
                     cmd.Connection = Connection.con;
                     cmd.CommandText = "USE pos SELECT itemid FROM temp_return WHERE itemid = '" + code.Text.Trim() + "' AND billnumber = '" + bill + "';";
                     SqlDataReader read1 = cmd.ExecuteReader();
@@ -158,7 +158,9 @@ namespace PosSystem
             }
             catch (Exception ex)
             {
-
+                string errorMessage = ex.Message;
+                string error = "Warning";
+                MessageBox.Show(errorMessage, error);
             }
         }
     }
